@@ -26,21 +26,13 @@ app.use(rateLimiter);
 // Routes
 app.use("/api/notes", notesRoutes);
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "Production") {
     app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
     app.get("*", (req, res) => {
         res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
     });
 }
-
-// 🚨 DEBUG: Dump registered routes to detect malformed paths
-console.log("🚀 Dumping registered route paths:");
-app._router.stack.forEach((middleware) => {
-    if (middleware.route && middleware.route.path) {
-        console.log("➡️", middleware.route.path);
-    }
-});
 
 // Start server
 connectDB().then(() => {
