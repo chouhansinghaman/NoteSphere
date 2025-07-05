@@ -54,7 +54,7 @@ export async function updateNote(req, res) {
 
         res.status(200).json(updatedNote);
     } catch (error) {
-        console.log("Error in createNote controller", error);
+        console.log("Error in updateNote controller", error);
         res.status(500).json({ message: "Internal server error" });
     }
 };
